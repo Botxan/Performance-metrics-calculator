@@ -1,14 +1,36 @@
-#include "stdio.h"
-#include "files.h"
-#include "performance-metrics.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-int main() {
+#include "ds.h"
+#include "metrics.h"
+
+/*
+ * Calculates the mean speeds, speedups and efficiencies from the text file
+ * passed by argv
+ */
+int main(int argc, char *argv[]) {
+    ds_t ds;
+    metrics_t metrics;
+
+    if (argc != 2) {
+        printf("Usage: %s <input-file>\n", argv[0]);
+        exit(1);
+    }
+
     // read file and store data in struct
-    read_file();
+    read_dataset(argv[1], &ds);
 
     // calculate performance metrics
-    calculate_performance_metrics();
+    init_metrics(&ds, &metrics);
+    calc_metrics(&ds, &metrics);
 
-    // print metrics on screen
-    print_metrics();
+    //print metrics on screen
+    print_metrics(&ds, &metrics);
+
+    // Not really needed, but for some environments
+    free(ds.cols);
+    free(ds.processors);
+    for (int i = 0; i < ds.rows; i++)
+        free(ds.runs[i]);
+    free(ds.runs);
 }

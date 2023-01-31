@@ -5,13 +5,13 @@ ODIR = obj
 
 ## CC compiler options ##
 CC = gcc
-CFLAGS = -Wall -I$(IDIR)
+CFLAGS = -g -Wall -I$(IDIR)
 LIBS = -lm
 
-_DEPS = performance-metrics.h files.h
+_DEPS = metrics.h ds.h
 DEPS = $(patsubst %, $(IDIR)/%, $(_DEPS))
 
-_OBJ = performance-metrics.o files.o
+_OBJ = metrics.o ds.o
 OBJ = $(patsubst %, $(ODIR)/%, $(_OBJ))
 
 ## Compilation ##
