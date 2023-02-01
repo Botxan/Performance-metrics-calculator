@@ -24,8 +24,13 @@ int main(int argc, char *argv[]) {
     init_metrics(&ds, &metrics);
     calc_metrics(&ds, &metrics);
 
-    //print metrics on screen
-    print_metrics(&ds, &metrics);
+    // store results in a file
+    export_metrics(&ds, &metrics);
+    printf("Results saved in ./output/metrics.dat\n");
+
+    // draw plots
+    plot_metrics();
+    printf("Plots saved in ./output/exec-time.png and ./output/speedup-efficiency.png\n");
 
     // Not really needed, but for some environments
     free(ds.cols);

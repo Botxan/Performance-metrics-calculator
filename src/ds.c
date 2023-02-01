@@ -6,6 +6,9 @@
 
 #define SIZE 4096
 
+/*
+ * Imports the dataset
+ */
 int read_dataset(char* filename, ds_t *ds) {
     FILE *fp;
     int i, j;
