@@ -3,6 +3,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <omp.h>
 
 #include "ds.h"
 #include "metrics.h"
@@ -25,8 +26,9 @@ void init_metrics(ds_t *ds, metrics_t *metrics) {
  */
 void calc_metrics(ds_t *ds, metrics_t *metrics) {
     int i, j;
-    double sum;
+    double sum = 0;
 
+    #pragma omp parallel for default(none) private(i, j) shared(ds, metrics) reduction(+:sum)
     for (i = 0; i < ds->rows; i++) {
         sum = 0.0;
         for (j = 0; j < ds->cols[i]-1; j++) {

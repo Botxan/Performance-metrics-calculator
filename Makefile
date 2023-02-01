@@ -5,7 +5,7 @@ ODIR = obj
 
 ## CC compiler options ##
 CC = gcc
-CFLAGS = -g -Wall -I$(IDIR)
+CFLAGS = -g -Wall -I$(IDIR) -O2 -fopenmp
 LIBS = -lm
 
 _DEPS = metrics.h ds.h
