@@ -28,7 +28,7 @@ void calc_metrics(ds_t *ds, metrics_t *metrics) {
     int i, j;
     double sum = 0;
 
-    #pragma omp parallel for default(none) private(i, j) shared(ds, metrics) reduction(+:sum)
+    #pragma omp parallel for default(none) private(i, j, sum) shared(ds, metrics)
     for (i = 0; i < ds->rows; i++) {
         sum = 0.0;
         for (j = 0; j < ds->cols[i]-1; j++) {
